@@ -3,40 +3,44 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
 
-// Register a new user
+//register a new user
 const registerUser = async (req, res) => {
   try {
-    const { username, email, password, confirmPassword, citizenId, location } =
-      req.body;
-    console.log(req.body);
-
-  
-
+    const { firstName,lastName, email, password, confirmPassword } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
+    //check confirm password
+    if (password !== confirmPassword) {
+      return res.status(400).json({ error: "Password does not match" });
+    }
+    //check if the user is already present
 
-    // Create a new user
-    const user = new User({
-      username,
-      email,
-      password: hashedPassword,
-      citizenId,
-      location,
-    });
-    // Save the user to the database
-    await user.save();
+    else {
+      const user= new User({
+        firstName,
+        lastName,
+        email,
+        password: hashedPassword,
+        // confirmPassword: hashedPassword,
+      });
+      await user.save();
+      res.status(201).json({ message: "User registered successfully" });
+
+    }
     
-
-    res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
+
+
+
+
 // Login user
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(email, password);
+    
 
     // Find the user by email
     const user = await User.findOne({ email });
@@ -88,7 +92,7 @@ const addUserDetails = async (req, res) => {
 
  const getUserDetails = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.find({});
     if (user) {
       res.status(200).json(user);
     } else {
@@ -131,6 +135,6 @@ const deleteUserById= async(req, res)=>{
 };
 
 
-export { registerUser, loginUser, getUserById, addUserDetails,getUserDetails,deleteUserById };
+export { registerUser, loginUser, getUserById, addUserDetails,getUserDetails,deleteUserById,};
 
 // export { registerUser, loginUser, adminOnlyRoute, addUserDetails,getUserDetails }

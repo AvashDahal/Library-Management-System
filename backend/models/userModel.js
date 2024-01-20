@@ -19,16 +19,21 @@ const userSchema = mongoose.Schema({
         required: true,
         trim: true,
         unique: true,
-        minLength: 3,
-        maxLength: 20
+       
     },
     password: {
         type: String,
         required: true,
         trim: true,
-        minLength: 3,
-        maxLength: 20
+       
     },
+    confirmPassword: {
+        type: String,
+        required: false,
+        trim: true,
+       
+    },
+
     location: {
         type: String, // String ma store
       },

@@ -34,12 +34,9 @@ const bookSchema = new mongoose.Schema({
     },
     user_id: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
+      required: false,
       ref: "User",
     },
 
   });
-  
-  const Book = mongoose.model('Book', bookSchema);
-  
-  module.exports = Book;
+  export default mongoose.model("Book", bookSchema);
