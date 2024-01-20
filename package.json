@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+<<<<<<< HEAD:package.json
   "type":"module",
+=======
+  "type": "module",
+>>>>>>> fcdbdf71aa449cf6999e9e8a25fb879b4af36bc8:backend/package.json
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
