@@ -3,9 +3,10 @@ import cors from "cors";
 import express from "express";
 
 // import formData from "express-form-data";
-import os from "os";
+//   
 
 import userRouter from "./routes/userRoutes.js";
+import bookRouter from "./routes/bookRoutes.js";
 
 import connectDB from "./db/database.js";
 import path, { dirname } from "path";
@@ -28,6 +29,7 @@ app.use(
     })
   );
 app.use("/api/users", userRouter);
+app.use("/api/books", bookRouter);
 app.use(express.static(path.join(__dirname, "frontend/build")));
 export { app };
 
